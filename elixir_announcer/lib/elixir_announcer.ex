@@ -1,10 +1,6 @@
 defmodule ElixirAnnouncer.Consumer do
   use Nostrum.Consumer
 
-  def send_message() do
-    Nostrum.Api.Message.create(1_363_275_989_261_484_112, "hello!")
-  end
-
   @impl true
   def handle_event({:READY, data, _ws_state}) do
     Logger.debug("Bot connected #{data.user.username}")
@@ -16,7 +12,7 @@ defmodule ElixirAnnouncer.Notifier do
   require Logger
   use GenServer
 
-  @elixir_channel 1_363_275_989_261_484_112
+  @elixir_channel Application.compile_env(:elixir_announcer, :discord_channel_id)
 
   def start_link(opts \\ []) do
     GenServer.start_link(__MODULE__, :ok, Keyword.put(opts, :name, __MODULE__))

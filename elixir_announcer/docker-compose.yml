@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  elixir_announcer:
+    container_name: elixir_announcer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env

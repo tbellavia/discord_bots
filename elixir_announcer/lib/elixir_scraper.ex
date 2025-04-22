@@ -2,7 +2,7 @@ defmodule ElixirAnnouncer.Scraper do
   require Logger
   use GenServer
 
-  @interval :timer.seconds(10)
+  @interval Application.compile_env(:elixir_announcer, :scraping_interval)
   @topstories_endpoint "https://hacker-news.firebaseio.com/v0/topstories.json"
   @story_endpoint "https://hacker-news.firebaseio.com/v0/item"
 

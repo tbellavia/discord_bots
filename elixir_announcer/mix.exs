@@ -23,7 +23,8 @@ defmodule ElixirAnnouncer.MixProject do
   defp deps do
     [
       {:nostrum, "~> 0.10"},
-      {:httpoison, "~> 2.0"}
+      {:httpoison, "~> 2.0"},
+      {:dialyxir, "~> 1.3", only: [:dev], runtime: false}
     ]
   end
 end
