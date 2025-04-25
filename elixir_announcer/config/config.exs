@@ -4,7 +4,12 @@ defmodule EnvParser do
   def get_scraping_interval() do
     value = System.get_env("SCRAPING_INTERVAL", "10")
     {interval, _} = Integer.parse(value)
-    :timer.minutes(interval)
+
+    case Mix.env() do
+      :prod -> :timer.hours(interval)
+      :dev -> :timer.seconds(interval)
+      other -> raise "Unsupported Mix.env(): #{inspect(other)}"
+    end
   end
 end
 

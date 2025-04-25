@@ -1,9 +1,16 @@
 FROM elixir:1.18.3
 
-COPY . /opt/bot
+WORKDIR /app
 
-WORKDIR /opt/bot
+COPY . .
 
-RUN mix deps.get
+ARG MIX_ENV=dev
+ENV MIX_ENV=${MIX_ENV}
 
-ENTRYPOINT [ "mix", "run", "--no-halt" ]
+RUN mix local.hex --force && \
+    mix local.rebar --force && \
+    mix deps.get && \
+    mix deps.compile && \
+    mix compile
+
+CMD ["mix", "run", "--no-halt"]

@@ -6,5 +6,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - MIX_ENV=${MIX_ENV}
     env_file:
-      - .env
+      - .env.${MIX_ENV}
+    environment:
+      - APP_ENV=${MIX_ENV}
+    command: ["mix", "run", "--no-halt"]

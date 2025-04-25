@@ -28,11 +28,15 @@ defmodule ElixirAnnouncer.Scraper do
     response = HTTPoison.get!(@topstories_endpoint)
     {:ok, stories} = JSON.decode(response.body)
 
-    stories
-      = stories
+    stories =
+      stories
       |> Enum.map(&get_story/1)
-      |> Enum.map(&Task.await(&1))
+      |> Task.await_many()
+
     elixir_stories = Enum.filter(stories, &elixir_story?/1)
+    if Enum.empty?(elixir_stories) do
+      Logger.debug("no elixir articles found on hackernews")
+    end
     Enum.each(elixir_stories, &notify_story/1)
   end
 
