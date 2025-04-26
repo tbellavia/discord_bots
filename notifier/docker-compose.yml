@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   elixir_announcer:
-    container_name: elixir_announcer
+    container_name: notifier
     build:
       context: .
       dockerfile: Dockerfile
