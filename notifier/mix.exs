@@ -3,7 +3,7 @@ defmodule ElixirAnnouncer.MixProject do
 
   def project do
     [
-      app: :elixir_announcer,
+      app: :notifier,
       version: "0.1.0",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule ElixirAnnouncer.MixProject do
   def application do
     [
       extra_applications: [:logger, :wx, :observer, :runtime_tools],
-      mod: {ElixirAnnouncer.Application, []}
+      mod: {Notifier.Application, []}
     ]
   end
 

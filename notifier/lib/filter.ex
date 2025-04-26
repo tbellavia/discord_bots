@@ -19,7 +19,6 @@ defmodule Notifier.Filter do
       |> Enum.map(&filter_stories(stories, &1))
       |> Enum.flat_map(& &1)
 
-    IO.inspect(filtered_stories)
     {:noreply, filtered_stories, state}
   end
 

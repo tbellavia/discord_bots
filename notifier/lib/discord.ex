@@ -4,7 +4,7 @@ defmodule Notifier.Discord do
   alias Nostrum.Struct.Embed
   use GenStage
 
-  @channel Application.compile_env(:elixir_announcer, :discord_channel_id)
+  @channel Application.compile_env(:notifier, :discord_channel_id)
 
   def start_link(_initial) do
     GenStage.start_link(__MODULE__, %{})
