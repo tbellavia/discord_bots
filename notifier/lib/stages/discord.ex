@@ -17,7 +17,7 @@ defmodule Notifier.Discord do
 
   @impl true
   def handle_events(stories, _from, state) do
-    Logger.debug("[DISCORD CONSUMER]")
+    Logger.info("[DISCORD CONSUMER]")
     for story <- stories do
       description = """
       Lien hackernews: https://news.ycombinator.com/item?id=#{story["id"]}
@@ -30,6 +30,7 @@ defmodule Notifier.Discord do
         |> Embed.put_description(description)
 
       Nostrum.Api.Message.create(@channel, embed: embed)
+      Logger.info("posting #{story["id"]}#('#{story["title"]}') on discord")
     end
 
     {:noreply, [], state}

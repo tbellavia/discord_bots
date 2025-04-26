@@ -7,11 +7,34 @@ defmodule Notifier.Application do
 
   @impl true
   def start(_type, _args) do
+    keywords = [
+      "elixir",
+      "language",
+      "programming",
+      "rust",
+      "go",
+      "golang",
+      "space",
+      "lisp",
+      "clojure",
+      "racket",
+      "silicon valley",
+      "san francisco",
+      "book",
+      "vim",
+      "neovim",
+      "nvim",
+      "apple",
+      "iphone",
+      "macos",
+      "mac"
+    ]
+
     children = [
       Notifier.Nostrum.Consumer,
       Notifier.Scraper,
-      {Notifier.Filter, [["ai", "language", "programming"]]},
-      Notifier.Discord,
+      {Notifier.Filter, keywords},
+      Notifier.Discord
     ]
 
     opts = [strategy: :one_for_one, name: Notifier.Supervisor]

@@ -2,7 +2,7 @@ defmodule Notifier.Scraper do
   require Logger
   use GenStage
 
-  @interval :timer.seconds(20)
+  @interval :timer.seconds(5)
   @endpoint_topstories "https://hacker-news.firebaseio.com/v0/topstories.json"
   @endpoint_story "https://hacker-news.firebaseio.com/v0/item"
 
@@ -31,7 +31,7 @@ defmodule Notifier.Scraper do
   end
 
   defp fetch_stories() do
-    Logger.debug("fetching stories from hackernews")
+    Logger.info("fetching stories from hackernews")
 
     with {:ok, %HTTPoison.Response{body: body}} <- HTTPoison.get(@endpoint_topstories),
          {:ok, ids} <- JSON.decode(body) do
@@ -43,7 +43,7 @@ defmodule Notifier.Scraper do
 
   defp fetch_story(id) do
     Task.async(fn ->
-      Logger.debug("fetching story #{id} from hackernews")
+      Logger.info("fetching story #{id} from hackernews")
       url = "#{@endpoint_story}/#{id}.json"
 
       with {:ok, %HTTPoison.Response{body: body}} <- HTTPoison.get(url),
