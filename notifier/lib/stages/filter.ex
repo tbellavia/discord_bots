@@ -16,6 +16,7 @@ defmodule Notifier.Filter do
     Logger.info("[FILTERING]")
 
     filtered_stories = filter_stories(stories, filters)
+
     {:noreply, filtered_stories, state}
   end
 

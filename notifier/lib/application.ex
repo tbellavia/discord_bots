@@ -31,7 +31,7 @@ defmodule Notifier.Application do
     ]
 
     children = [
-      Notifier.Nostrum.Consumer,
+      Notifier.Bot.Discord,
       Notifier.Scraper,
       {Notifier.Filter, keywords},
       Notifier.Discord

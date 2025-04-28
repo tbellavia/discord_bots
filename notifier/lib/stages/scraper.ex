@@ -2,7 +2,7 @@ defmodule Notifier.Scraper do
   require Logger
   use GenStage
 
-  @interval :timer.seconds(5)
+  @interval Application.compile_env(:notifier, :scraping_interval)
   @endpoint_topstories "https://hacker-news.firebaseio.com/v0/topstories.json"
   @endpoint_story "https://hacker-news.firebaseio.com/v0/item"
 
