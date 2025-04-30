@@ -1,22 +1,11 @@
 import Config
 
-scraping_interval =
-  case Mix.env() do
-    :prod ->
-      # Ex: lire une variable d'env et transformer en heures
-      System.get_env("SCRAPING_INTERVAL", "1")
-      |> String.to_integer()
-      |> :timer.hours()
-
-    :dev ->
-      # Ex: lire une variable d'env et transformer en secondes
-      System.get_env("SCRAPING_INTERVAL", "10")
-      |> String.to_integer()
-      |> :timer.seconds()
-
-    _ ->
-      raise "Unsupported environment: #{Mix.env()}"
-  end
+# scraping_interval =
+#   fn env ->
+#     System.get_env(env, "10")
+#     |> String.to_integer()
+#     |> :timer.seconds()
+#   end
 
 config :nostrum,
   token: System.get_env("DISCORD_TOKEN"),
@@ -25,4 +14,4 @@ config :nostrum,
 
 config :notifier,
   discord_channel_id: 1_365_639_551_925_747_722,
-  scraping_interval: scraping_interval
+  scraping_interval: :timer.seconds(30)

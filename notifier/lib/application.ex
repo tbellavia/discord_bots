@@ -32,9 +32,9 @@ defmodule Notifier.Application do
 
     children = [
       Notifier.Bot.Discord,
-      Notifier.Scraper,
-      {Notifier.Filter, keywords},
-      Notifier.Discord
+      Stages.Scraper,
+      {Stages.Filter, keywords},
+      Stages.Discord
     ]
 
     opts = [strategy: :one_for_one, name: Notifier.Supervisor]

@@ -1,4 +1,4 @@
-defmodule Notifier.Discord do
+defmodule Stages.Discord do
   require Logger
 
   alias Nostrum.Struct.Embed
@@ -12,7 +12,7 @@ defmodule Notifier.Discord do
 
   @impl true
   def init(state) do
-    {:consumer, state, subscribe_to: [Notifier.Filter]}
+    {:consumer, state, subscribe_to: [Stages.Filter]}
   end
 
   @impl true

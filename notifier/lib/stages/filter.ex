@@ -1,4 +1,4 @@
-defmodule Notifier.Filter do
+defmodule Stages.Filter do
   require Logger
   use GenStage
 
@@ -8,7 +8,7 @@ defmodule Notifier.Filter do
 
   @impl true
   def init(state) do
-    {:producer_consumer, state, subscribe_to: [Notifier.Scraper]}
+    {:producer_consumer, state, subscribe_to: [Stages.Scraper]}
   end
 
   @impl true

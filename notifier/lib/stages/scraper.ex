@@ -1,4 +1,4 @@
-defmodule Notifier.Scraper do
+defmodule Stages.Scraper do
   require Logger
   use GenStage
 
