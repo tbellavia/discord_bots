@@ -1,4 +1,5 @@
 defmodule Stages.Scraper do
+  alias Core.Article
   require Logger
   use GenStage
 
@@ -48,7 +49,12 @@ defmodule Stages.Scraper do
 
       with {:ok, %HTTPoison.Response{body: body}} <- HTTPoison.get(url),
            {:ok, story} <- JSON.decode(body) do
-        story
+        %Article{
+          title: story["title"],
+          url: story["url"],
+          id: id,
+          source: :hackernews
+        }
       end
     end)
   end

@@ -16,21 +16,22 @@ defmodule Stages.Discord do
   end
 
   @impl true
-  def handle_events(stories, _from, state) do
+  def handle_events(articles, _from, state) do
     Logger.info("[DISCORD CONSUMER]")
-    for story <- stories do
+
+    for article <- articles do
       description = """
-      Lien hackernews: https://news.ycombinator.com/item?id=#{story["id"]}
+      Lien hackernews: https://news.ycombinator.com/item?id=#{article.id}
       """
 
       embed =
         %Embed{}
-        |> Embed.put_title(story["title"])
-        |> Embed.put_url(story["url"])
+        |> Embed.put_title(article.title)
+        |> Embed.put_url(article.url)
         |> Embed.put_description(description)
 
       Nostrum.Api.Message.create(@channel, embed: embed)
-      Logger.info("posting #{story["id"]}#('#{story["title"]}') on discord")
+      Logger.info("posting #{article.id}#('#{article.title}') on discord")
     end
 
     {:noreply, [], state}

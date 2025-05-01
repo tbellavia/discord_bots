@@ -22,7 +22,7 @@ defmodule Stages.Filter do
 
   defp filter_stories(stories, filters) do
     stories |> Enum.filter(fn story ->
-      filters_match?(story["title"], filters)
+      filters_match?(story.title, filters)
     end)
   end
 
